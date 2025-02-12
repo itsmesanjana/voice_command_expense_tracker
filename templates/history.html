@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Transaction History</h1>
+
+<!-- Filter for Transaction Type (Income/Expense) -->
+<label for="transactionTypeFilter">Filter by Type:</label>
+<select id="transactionTypeFilter">
+    <option value="">All</option>
+    <option value="income">Income</option>
+    <option value="expense">Expense</option>
+</select>
+
+<!-- Filter for Transaction Category -->
+<label for="categoryFilter">Filter by Category:</label>
+<select id="categoryFilter">
+    <option value="">All</option>
+</select>
+
+<!-- Reset Filters Button -->
+<!-- Reset Filters Button -->
+<button id="resetFilters" class="history-btn reset-filters">Reset Filters</button>
+<button onclick="deleteAllTransactions()" class="history-btn delete-all">Delete All Transactions</button>
+<!-- Remaining Balance Display -->
+<div id="remainingBalance" class="alert alert-success mt-3"></div>
+
+<!-- Total Amount Display -->
+<div id="totalAmount" class="alert alert-info mt-3"></div>
+
+<!-- Transaction Table -->
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <!-- <th>Time</th> -->
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction['id'] }}</td>
+            <td>{{ transaction['type'] }}</td>
+            <td>{{ transaction['category'] }}</td>
+            <td>{{ transaction['amount'] }}</td>
+            <td>{{ transaction['date'] }}</td>
+            <!-- <td>{{ transaction['time'] }}</td> -->
+            <td>
+                <button class="history-btn delete-btn" onclick="deleteTransaction(`{{ transaction['id'] }}`)">Delete</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tbody>
+        <!-- Transactions will be populated here by JS -->
+    </tbody>
+</table>
+<!-- Inline JavaScript for Filtering and Transactions -->
+<script src="{{ url_for('static', filename='history.js') }}"></script>
+</body>
+</html>

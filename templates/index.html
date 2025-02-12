@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Expense Tracker</h1>
+
+        <div class="form-group">
+            <label for="transactionType">Transaction Type:</label>
+            <select id="transactionType">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category"></select>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" class="form-control" placeholder="Enter amount" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" class="form-control" required>
+        </div>
+
+        <button id="createTransactionButton" class="btn btn-primary">Add Transaction</button>
+        <button id="voiceCommand" class="btn btn-secondary">Add by Voice</button>
+
+        <h3>Recent Transactions</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <!-- <th>Time</th> -->
+                </tr>
+            </thead>
+            <tbody id="transactionTableBody"></tbody>
+        </table>
+
+        <a href="/history" class="btn btn-info">View Transaction History</a>
+        <div id="remainingBalance" class="alert alert-success mt-3"></div>
+        <div id="adviceBox" class="alert alert-info mt-3"></div>
+        <div>
+            <h3>Expenses Chart</h3>
+            <canvas id="expenseChart"></canvas>
+        </div>
+        <div>
+            <h3>Income Chart</h3>
+            <canvas id="incomeChart"></canvas>
+        </div>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
